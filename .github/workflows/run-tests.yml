@@ -1,0 +1,16 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: run tests
+        run: npm run wdio
