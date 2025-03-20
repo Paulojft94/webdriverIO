@@ -21,3 +21,26 @@ jobs:
 
       - name: Run tests
         run: npm run wdio
+
+      - name: Atualizar README com informações do CI
+        run: |
+          # Captura a data e hora atual
+          LAST_RUN=$(date +"%Y-%m-%d %H:%M:%S")
+          # Define o status desejado (pode ser dinâmico, dependendo dos testes)
+          STATUS="Todos os testes passaram"
+          # Substitui o placeholder no README pelo status e data/hora
+          sed -i "s/<!-- CI_STATUS: placeholder -->/<!-- CI_STATUS: --> Última execução: $LAST_RUN - $STATUS/g" README.md
+
+      - name: Commit e Push da atualização no README
+        run: |
+          # Configura as credenciais do Git para o commit
+          git config --local user.email "1222013@isep.ipp.pt"
+          git config --local user.name "Paulojft94"
+          # Adiciona e comita a alteração no README
+          git add README.md
+          git commit -m "Atualiza status do CI no README [skip ci]"
+          # Faz o push da alteração
+          git push
+        env:
+          # Utiliza o token padrão do GitHub Actions para autenticação
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
