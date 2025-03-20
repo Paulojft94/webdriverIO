@@ -32,7 +32,7 @@ jobs:
         run: |
           git config --local user.email "1222013@isep.ipp.pt"
           git config --local user.name "Paulojft94"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Paulojft94/webdriverIO.git
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Paulojft94/webdriverIO
 
       - name: Commit e Push da atualização no README
         run: |
