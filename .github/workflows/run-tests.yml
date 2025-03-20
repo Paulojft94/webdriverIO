@@ -22,17 +22,15 @@ jobs:
       - name: Run tests
         run: npm run wdio
 
-      - name: Atualizar README com informações do CI
+      - name: Set Environment Variables
         run: |
-          LAST_RUN=$(date +"%Y-%m-%d %H:%M:%S")
-          STATUS="Todos os testes passaram"
-          sed -i "s/<!-- CI_STATUS: placeholder -->/<!-- CI_STATUS: --> Última execução: $LAST_RUN - $STATUS/g" README.md
+          echo "LAST_RUN=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+          echo "STATUS=Passed" >> $GITHUB_ENV
+          echo "TEST_RESULTS=20/20" >> $GITHUB_ENV
 
-      - name: Configurar credenciais Git e atualizar remote
-        run: |
-          git config --local user.email "1222013@isep.ipp.pt"
-          git config --local user.name "Paulojft94"
-          git remote set-url origin https://x-access-token:${{secrets.MY_PAT}}@github.com/Paulojft94/webdriverIO.git
-          git add README.md
-          git commit -m "Atualiza status do CI no README [skip ci]"
-          git push
+      - name: Generate CI Status Badge
+        uses: alvivi/shield-badge@v1
+        with:
+          label: "Last test execution"
+          text: "Última execução: ${{ env.LAST_RUN }} - ${{ env.STATUS }} (Tests: ${{ env.TEST_RESULTS }})"
+      
