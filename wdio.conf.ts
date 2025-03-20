@@ -125,23 +125,7 @@ export const config: WebdriverIO.Config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: [
-    "spec",
-    [
-      "html-nice",
-      {
-        outputDir: "./reports/html-reports/",
-        filename: "report.html",
-        reportTitle: "Test Report Title",
-        linkScreenshots: true,
-        //to show the report in a browser when done
-        showInBrowser: true,
-        collapseTests: false,
-        //to turn on screenshots after every test
-        useOnAfterCommandForScreenshot: false,
-      },
-    ],
-  ],
+  reporters: ["spec"],
 
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
