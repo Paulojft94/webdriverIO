@@ -22,15 +22,4 @@ jobs:
       - name: Run tests
         run: npm run wdio
 
-      - name: Set Environment Variables
-        run: |
-          echo "LAST_RUN=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
-          echo "STATUS=Passed" >> $GITHUB_ENV
-          echo "TEST_RESULTS=20/20" >> $GITHUB_ENV
-
-      - name: Generate CI Status Badge
-        uses: alvivi/shield-badge@v1
-        with:
-          label: "Last test execution"
-          text: "Última execução: ${{ env.LAST_RUN }} - ${{ env.STATUS }} (Tests: ${{ env.TEST_RESULTS }})"
       
